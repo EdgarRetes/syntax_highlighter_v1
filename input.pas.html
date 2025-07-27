@@ -1,0 +1,110 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tokenized Code - input.pas (Pascal)</title>
+        <style>
+            
+      span {
+        cursor: default;
+      }
+      span:hover {
+        background-color: rgba(255,255,255,0.1);
+      }
+      body { font-family: monospace; background-color: #282c34; color: #abb2bf; }
+      .code-container {
+          background-color: #21252b;
+          border: 1px solid #3b4048;
+          padding: 15px;
+          border-radius: 5px;
+          margin: 20px;
+          white-space: pre-wrap; /* Preserves whitespace and wraps lines */
+          word-wrap: break-word; /* Breaks long words */
+      }
+      .PREPROCESSOR_DIRECTIVE { color: #56b6c2; } /* Cyan */
+      .KEYWORD { color: #c678dd; } /* Purple */
+      .IDENTIFIER { color: #e06c75; } /* Reddish-orange */
+      .DELIMITER { color: #abb2bf; } /* Gray */
+      .OPERATOR { color: #56b6c2; } /* Cyan */
+      .STRING { color: #98c379; } /* Green */
+      .NUMBER { color: #d19a66; } /* Orange */
+      .COMMENT { color: #5c6370; font-style: italic; } /* Dark gray, italic */
+      .CHAR { color: #98c379; } /* Green */
+      .OPERATOR_IDENTIFIER { color: #e06c75; } /* Reddish-orange (similar to identifier but distinct if needed) */
+      .WHITESPACE { color: #abb2bf; } /* Can keep default or make it subtle if visible */
+      .ERROR { background-color: red; color: white; }
+      table.token-summary {
+        margin: 20px;
+        border-collapse: collapse;
+        width: 400px;
+        background-color: #21252b;
+        color: #abb2bf;
+      }
+      table.token-summary th, table.token-summary td {
+        border: 1px solid #3b4048;
+        padding: 8px;
+        text-align: left;
+      }
+      table.token-summary th {
+        background-color: #3b4048;
+      }
+    
+        </style>
+    </head>
+    <body>
+        <h1>Tokenized Code: input.pas (Pascal)</h1>
+        <div class="code-container">
+    <span class="KEYWORD" title="KEYWORD">program</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">SaludoUsuario</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+</span><span class="KEYWORD" title="KEYWORD">var</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="DELIMITER" title="DELIMITER">:</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">string</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="IDENTIFIER" title="IDENTIFIER">edad</span><span class="DELIMITER" title="DELIMITER">:</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">integer</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="IDENTIFIER" title="IDENTIFIER">min_edad</span><span class="DELIMITER" title="DELIMITER">:</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">integer</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="IDENTIFIER" title="IDENTIFIER">i</span><span class="DELIMITER" title="DELIMITER">:</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">integer</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+
+</span><span class="KEYWORD" title="KEYWORD">begin</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="COMMENT" title="COMMENT">{ Programa de saludo al usuario }</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="KEYWORD" title="KEYWORD">write</span><span class="DELIMITER" title="DELIMITER">(</span><span class="STRING" title="STRING">'Por favor, ingresa tu nombre: '</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="KEYWORD" title="KEYWORD">readln</span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    
+    </span><span class="KEYWORD" title="KEYWORD">if</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">''</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">then</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="KEYWORD" title="KEYWORD">begin</span><span class="WHITESPACE" title="WHITESPACE">
+        </span><span class="KEYWORD" title="KEYWORD">writeln</span><span class="DELIMITER" title="DELIMITER">(</span><span class="STRING" title="STRING">'No ingresaste ningún nombre. ¡Hasta luego!'</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+        </span><span class="KEYWORD" title="KEYWORD">exit</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="KEYWORD" title="KEYWORD">end</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    
+    </span><span class="KEYWORD" title="KEYWORD">writeln</span><span class="DELIMITER" title="DELIMITER">(</span><span class="STRING" title="STRING">'¡Hola, '</span><span class="DELIMITER" title="DELIMITER">,</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="DELIMITER" title="DELIMITER">,</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">'!'</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="KEYWORD" title="KEYWORD">writeln</span><span class="DELIMITER" title="DELIMITER">(</span><span class="STRING" title="STRING">'Las letras de tu nombre son:'</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    
+    </span><span class="KEYWORD" title="KEYWORD">for</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">i</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">:=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="NUMBER" title="NUMBER">1</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">to</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">length</span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">do</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="KEYWORD" title="KEYWORD">begin</span><span class="WHITESPACE" title="WHITESPACE">
+        </span><span class="KEYWORD" title="KEYWORD">if</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="DELIMITER" title="DELIMITER">[</span><span class="IDENTIFIER" title="IDENTIFIER">i</span><span class="DELIMITER" title="DELIMITER">]</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&gt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">' '</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">then</span><span class="WHITESPACE" title="WHITESPACE">
+            </span><span class="KEYWORD" title="KEYWORD">writeln</span><span class="DELIMITER" title="DELIMITER">(</span><span class="STRING" title="STRING">'- '</span><span class="DELIMITER" title="DELIMITER">,</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="DELIMITER" title="DELIMITER">[</span><span class="IDENTIFIER" title="IDENTIFIER">i</span><span class="DELIMITER" title="DELIMITER">]</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="KEYWORD" title="KEYWORD">end</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    
+    </span><span class="KEYWORD" title="KEYWORD">write</span><span class="DELIMITER" title="DELIMITER">(</span><span class="STRING" title="STRING">'¿Cuántos años tienes?: '</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="KEYWORD" title="KEYWORD">readln</span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">edad</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="IDENTIFIER" title="IDENTIFIER">min_edad</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">:=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="NUMBER" title="NUMBER">18</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    
+    </span><span class="KEYWORD" title="KEYWORD">if</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">edad</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&gt;=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">min_edad</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">then</span><span class="WHITESPACE" title="WHITESPACE">
+        </span><span class="KEYWORD" title="KEYWORD">writeln</span><span class="DELIMITER" title="DELIMITER">(</span><span class="STRING" title="STRING">'¡Eres mayor de edad!'</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="KEYWORD" title="KEYWORD">else</span><span class="WHITESPACE" title="WHITESPACE">
+        </span><span class="KEYWORD" title="KEYWORD">writeln</span><span class="DELIMITER" title="DELIMITER">(</span><span class="STRING" title="STRING">'Te faltan '</span><span class="DELIMITER" title="DELIMITER">,</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">min_edad</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">-</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">edad</span><span class="DELIMITER" title="DELIMITER">,</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">' años para ser mayor de edad.'</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    
+    </span><span class="KEYWORD" title="KEYWORD">writeln</span><span class="DELIMITER" title="DELIMITER">(</span><span class="STRING" title="STRING">'¡Programa terminado!'</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+</span><span class="KEYWORD" title="KEYWORD">end</span><span class="DELIMITER" title="DELIMITER">.</span></div>
+    <h2>Análisis de Tokens</h2>
+    <table class="token-summary">
+        <thead>
+            <tr><th>Tipo de Token</th><th>Cantidad</th><th>Porcentaje</th></tr>
+        </thead>
+        <tbody>
+    <tr><td class=DELIMITER>DELIMITER</td><td>57</td><td>42.54%</td></tr><tr><td class=KEYWORD>KEYWORD</td><td>35</td><td>26.12%</td></tr><tr><td class=IDENTIFIER>IDENTIFIER</td><td>20</td><td>14.93%</td></tr><tr><td class=STRING>STRING</td><td>13</td><td>9.70%</td></tr><tr><td class=OPERATOR>OPERATOR</td><td>6</td><td>4.48%</td></tr><tr><td class=NUMBER>NUMBER</td><td>2</td><td>1.49%</td></tr><tr><td class=COMMENT>COMMENT</td><td>1</td><td>0.75%</td></tr>
+        <tr><th>Total</th><th>134</th><th>100%</th></tr>
+        </tbody>
+    </table>
+    
+    </body>
+    </html>
+    

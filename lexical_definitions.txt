@@ -1,0 +1,75 @@
+;; lexical_definitions.txt
+;; Definiciones léxicas para C++, Haskell y Pascal usando notación S-expression para RegEx
+
+;; ====================================================================
+;; DEFINICIONES PARA C++
+;; ====================================================================
+(language Cpp
+    (token PREPROCESSOR_DIRECTIVE (concat "#" (star (any-char-except "\n"))))
+    (token KEYWORD (or "alignas" "alignof" "and" "and_eq" "asm" "atomic_cancel" "atomic_commit"
+                        "atomic_noexcept" "auto" "break" "case" "catch" "char" "char8_t" "char16_t"
+                        "char32_t" "class" "concept" "const" "consteval" "constexpr" "constinit"
+                        "const_cast" "continue" "co_await" "co_return" "co_yield" "decltype"
+                        "default" "delete" "do" "double" "dynamic_cast" "else" "enum" "explicit"
+                        "export" "extern" "false" "float" "for" "friend" "goto" "if" "inline"
+                        "int" "long" "mutable" "namespace" "new" "noexcept" "not" "not_eq" "nullptr"
+                        "operator" "or" "or_eq" "private" "protected" "public" "reflexpr"
+                        "register" "reinterpret_cast" "requires" "return" "short" "signed" "sizeof"
+                        "static" "static_assert" "static_cast" "struct" "switch" "synchronized"
+                        "template" "this" "thread_local" "throw" "true" "try" "typedef" "typeid"
+                        "typename" "union" "unsigned" "using" "virtual" "void" "volatile" "wchar_t"
+                        "while" "xor" "xor_eq" "override" "final" "import" "module" "include" "string" "iostream"))
+    (token IDENTIFIER (concat (or alpha "_") (star (or alpha digit "_"))))
+    (token NUMBER (or (concat (plus digit) (star (or "ULL" "ll" "LL" "u" "l" "U" "L" "f" "F")))
+                        (concat (plus digit) "." (star digit) (star (or "f" "F" "l" "L")))
+                        (concat (star digit) "." (plus digit) (star (or "f" "F" "l" "L")))
+                        (concat "0x" (plus (or digit "a" "b" "c" "d" "e" "f" "A" "B" "C" "D" "E" "F")))
+                        (concat "0" (plus (or "0" "1" "2" "3" "4" "5" "6" "7")))
+                        (concat "0b" (plus (or "0" "1")))))
+    (token STRING "custom")  ;; Se maneja con patrón custom en el código
+    (token OPERATOR (or "..." "<<" ">>" "==" "!=" "<=" ">=" "&&" "||" "++" "--" "->" ".*" "::"
+                        "+=" "-=" "*=" "/=" "%=" "&=" "|=" "^=" "<<=" ">>="
+                        "+" "-" "*" "/" "%" "=" "&" "|" "^" "~" "!" "<" ">" "." "," "?"))
+    (token DELIMITER (or "(" ")" "[" "]" "{" "}" ";" ":"))
+    (token COMMENT "custom")  ;; Se maneja con patrón custom en el código
+    (token WHITESPACE (plus (or " " "\t" "\n" "\r")))
+)
+
+;; ====================================================================
+;; DEFINICIONES PARA HASKELL
+;; ====================================================================
+(language Haskell
+    (token KEYWORD (or "case" "class" "data" "default" "deriving" "do" "else" "if" "import"
+                        "in" "infix" "infixl" "infixr" "let" "module" "newtype" "of" "then"
+                        "type" "where" "forall"))
+    (token IDENTIFIER "custom")  ;; Se maneja con patrón custom
+    (token OPERATOR_IDENTIFIER "custom")  ;; Se maneja con patrón custom
+    (token NUMBER "custom")  ;; Se maneja con patrón custom
+    (token STRING "custom")  ;; Se maneja con patrón custom
+    (token CHAR "custom")  ;; Se maneja con patrón custom
+    (token OPERATOR (or "->" "<-" "=>" "::" ".." "=" "\\" "|" "`" "@" "~" "," ";"
+                        "$" "#" "." ":" "!" "?" "%" "^" "&" "*" "+" "-" "/" "<" ">"
+                        "="))
+    (token DELIMITER (or "(" ")" "[" "]" "{" "}" ","))
+    (token COMMENT "custom")  ;; Se maneja con patrón custom
+    (token WHITESPACE (plus (or " " "\t" "\n" "\r")))
+)
+
+;; ====================================================================
+;; DEFINICIONES PARA PASCAL
+;; ====================================================================
+(language Pascal
+    (token KEYWORD (or "and" "array" "begin" "case" "const" "div" "do" "downto"
+                        "else" "end" "file" "for" "function" "goto" "if" "in"
+                        "label" "mod" "nil" "not" "of" "or" "packed" "procedure"
+                        "program" "record" "repeat" "set" "then" "to" "type"
+                        "until" "var" "while" "with" "xor" "integer" "string" "write"
+                        "writeln" "readln" "length" "exit"))
+    (token IDENTIFIER "custom")  ;; Se maneja con patrón custom
+    (token NUMBER "custom")  ;; Se maneja con patrón custom
+    (token STRING "custom")  ;; Se maneja con patrón custom
+    (token OPERATOR (or ":=" "<>" "<=" ">=" "+" "-" "*" "/" "=" "<" ">" "@"))
+    (token DELIMITER (or "(" ")" "[" "]" "{" "}" ";" ":" "." ","))
+    (token COMMENT "custom")  ;; Se maneja con patrón custom
+    (token WHITESPACE (plus (or " " "\t" "\n" "\r")))
+)

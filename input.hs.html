@@ -1,0 +1,105 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tokenized Code - input.hs (Haskell)</title>
+        <style>
+            
+      span {
+        cursor: default;
+      }
+      span:hover {
+        background-color: rgba(255,255,255,0.1);
+      }
+      body { font-family: monospace; background-color: #282c34; color: #abb2bf; }
+      .code-container {
+          background-color: #21252b;
+          border: 1px solid #3b4048;
+          padding: 15px;
+          border-radius: 5px;
+          margin: 20px;
+          white-space: pre-wrap; /* Preserves whitespace and wraps lines */
+          word-wrap: break-word; /* Breaks long words */
+      }
+      .PREPROCESSOR_DIRECTIVE { color: #56b6c2; } /* Cyan */
+      .KEYWORD { color: #c678dd; } /* Purple */
+      .IDENTIFIER { color: #e06c75; } /* Reddish-orange */
+      .DELIMITER { color: #abb2bf; } /* Gray */
+      .OPERATOR { color: #56b6c2; } /* Cyan */
+      .STRING { color: #98c379; } /* Green */
+      .NUMBER { color: #d19a66; } /* Orange */
+      .COMMENT { color: #5c6370; font-style: italic; } /* Dark gray, italic */
+      .CHAR { color: #98c379; } /* Green */
+      .OPERATOR_IDENTIFIER { color: #e06c75; } /* Reddish-orange (similar to identifier but distinct if needed) */
+      .WHITESPACE { color: #abb2bf; } /* Can keep default or make it subtle if visible */
+      .ERROR { background-color: red; color: white; }
+      table.token-summary {
+        margin: 20px;
+        border-collapse: collapse;
+        width: 400px;
+        background-color: #21252b;
+        color: #abb2bf;
+      }
+      table.token-summary th, table.token-summary td {
+        border: 1px solid #3b4048;
+        padding: 8px;
+        text-align: left;
+      }
+      table.token-summary th {
+        background-color: #3b4048;
+      }
+    
+        </style>
+    </head>
+    <body>
+        <h1>Tokenized Code: input.hs (Haskell)</h1>
+        <div class="code-container">
+    <span class="KEYWORD" title="KEYWORD">module</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">Main</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">where</span><span class="WHITESPACE" title="WHITESPACE">
+
+</span><span class="KEYWORD" title="KEYWORD">import</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">System</span><span class="OPERATOR" title="OPERATOR">.</span><span class="IDENTIFIER" title="IDENTIFIER">IO</span><span class="WHITESPACE" title="WHITESPACE">
+
+</span><span class="COMMENT" title="COMMENT">-- Función para obtener las letras de un nombre</span><span class="WHITESPACE" title="WHITESPACE">
+</span><span class="IDENTIFIER" title="IDENTIFIER">obtenerLetras</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">::</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">String</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">-&gt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">[</span><span class="IDENTIFIER" title="IDENTIFIER">Char</span><span class="DELIMITER" title="DELIMITER">]</span><span class="WHITESPACE" title="WHITESPACE">
+</span><span class="IDENTIFIER" title="IDENTIFIER">obtenerLetras</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">filter</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="OPERATOR_IDENTIFIER" title="OPERATOR_IDENTIFIER">/=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="CHAR" title="CHAR">' '</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE">
+
+</span><span class="COMMENT" title="COMMENT">-- Función principal</span><span class="WHITESPACE" title="WHITESPACE">
+</span><span class="IDENTIFIER" title="IDENTIFIER">main</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">::</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">IO</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE">
+</span><span class="IDENTIFIER" title="IDENTIFIER">main</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">do</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="IDENTIFIER" title="IDENTIFIER">putStr</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"Por favor, ingresa tu nombre: "</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="IDENTIFIER" title="IDENTIFIER">hFlush</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">stdout</span><span class="WHITESPACE" title="WHITESPACE">
+    </span><span class="IDENTIFIER" title="IDENTIFIER">nombreUsuario</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;-</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">getLine</span><span class="WHITESPACE" title="WHITESPACE">
+    
+    </span><span class="KEYWORD" title="KEYWORD">if</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">null</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">nombreUsuario</span><span class="WHITESPACE" title="WHITESPACE">
+        </span><span class="KEYWORD" title="KEYWORD">then</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">putStrLn</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"No ingresaste ningún nombre. ¡Hasta luego!"</span><span class="WHITESPACE" title="WHITESPACE">
+        </span><span class="KEYWORD" title="KEYWORD">else</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">do</span><span class="WHITESPACE" title="WHITESPACE">
+            </span><span class="IDENTIFIER" title="IDENTIFIER">putStrLn</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">$</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"\n¡Hola, "</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR_IDENTIFIER" title="OPERATOR_IDENTIFIER">++</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">nombreUsuario</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR_IDENTIFIER" title="OPERATOR_IDENTIFIER">++</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"!"</span><span class="WHITESPACE" title="WHITESPACE">
+            </span><span class="IDENTIFIER" title="IDENTIFIER">putStrLn</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"Las letras de tu nombre son:"</span><span class="WHITESPACE" title="WHITESPACE">
+            </span><span class="IDENTIFIER" title="IDENTIFIER">mapM_</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="OPERATOR_IDENTIFIER" title="OPERATOR_IDENTIFIER">\</span><span class="IDENTIFIER" title="IDENTIFIER">c</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">-&gt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">putStrLn</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">$</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"- "</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR_IDENTIFIER" title="OPERATOR_IDENTIFIER">++</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">[</span><span class="IDENTIFIER" title="IDENTIFIER">c</span><span class="DELIMITER" title="DELIMITER">]</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">obtenerLetras</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">nombreUsuario</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE">
+            
+            </span><span class="IDENTIFIER" title="IDENTIFIER">putStr</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"¿Cuántos años tienes?: "</span><span class="WHITESPACE" title="WHITESPACE">
+            </span><span class="IDENTIFIER" title="IDENTIFIER">hFlush</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">stdout</span><span class="WHITESPACE" title="WHITESPACE">
+            </span><span class="IDENTIFIER" title="IDENTIFIER">edadStr</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;-</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">getLine</span><span class="WHITESPACE" title="WHITESPACE">
+            </span><span class="KEYWORD" title="KEYWORD">let</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">edad</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">read</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">edadStr</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">::</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">Int</span><span class="WHITESPACE" title="WHITESPACE">
+                </span><span class="IDENTIFIER" title="IDENTIFIER">minEdad</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="NUMBER" title="NUMBER">18</span><span class="WHITESPACE" title="WHITESPACE">
+            
+            </span><span class="KEYWORD" title="KEYWORD">if</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">edad</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR_IDENTIFIER" title="OPERATOR_IDENTIFIER">&gt;=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">minEdad</span><span class="WHITESPACE" title="WHITESPACE">
+                </span><span class="KEYWORD" title="KEYWORD">then</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">putStrLn</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"¡Eres mayor de edad!"</span><span class="WHITESPACE" title="WHITESPACE">
+                </span><span class="KEYWORD" title="KEYWORD">else</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">putStrLn</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">$</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"Te faltan "</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR_IDENTIFIER" title="OPERATOR_IDENTIFIER">++</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">show</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">minEdad</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">-</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">edad</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR_IDENTIFIER" title="OPERATOR_IDENTIFIER">++</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">" años para ser mayor de edad."</span><span class="WHITESPACE" title="WHITESPACE">
+            
+            </span><span class="IDENTIFIER" title="IDENTIFIER">putStrLn</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"\n¡Programa terminado!"</span></div>
+    <h2>Análisis de Tokens</h2>
+    <table class="token-summary">
+        <thead>
+            <tr><th>Tipo de Token</th><th>Cantidad</th><th>Porcentaje</th></tr>
+        </thead>
+        <tbody>
+    <tr><td class=IDENTIFIER>IDENTIFIER</td><td>46</td><td>41.44%</td></tr><tr><td class=OPERATOR>OPERATOR</td><td>16</td><td>14.41%</td></tr><tr><td class=DELIMITER>DELIMITER</td><td>14</td><td>12.61%</td></tr><tr><td class=KEYWORD>KEYWORD</td><td>12</td><td>10.81%</td></tr><tr><td class=STRING>STRING</td><td>11</td><td>9.91%</td></tr><tr><td class=OPERATOR_IDENTIFIER>OPERATOR_IDENTIFIER</td><td>8</td><td>7.21%</td></tr><tr><td class=COMMENT>COMMENT</td><td>2</td><td>1.80%</td></tr><tr><td class=CHAR>CHAR</td><td>1</td><td>0.90%</td></tr><tr><td class=NUMBER>NUMBER</td><td>1</td><td>0.90%</td></tr>
+        <tr><th>Total</th><th>111</th><th>100%</th></tr>
+        </tbody>
+    </table>
+    
+    </body>
+    </html>
+    

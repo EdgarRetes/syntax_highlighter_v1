@@ -1,0 +1,38 @@
+program SaludoUsuario;
+var
+    nombre_usuario: string;
+    edad: integer;
+    min_edad: integer;
+    i: integer;
+
+begin
+    { Programa de saludo al usuario }
+    write('Por favor, ingresa tu nombre: ');
+    readln(nombre_usuario);
+    
+    if nombre_usuario = '' then
+    begin
+        writeln('No ingresaste ningún nombre. ¡Hasta luego!');
+        exit;
+    end;
+    
+    writeln('¡Hola, ', nombre_usuario, '!');
+    writeln('Las letras de tu nombre son:');
+    
+    for i := 1 to length(nombre_usuario) do
+    begin
+        if nombre_usuario[i] <> ' ' then
+            writeln('- ', nombre_usuario[i]);
+    end;
+    
+    write('¿Cuántos años tienes?: ');
+    readln(edad);
+    min_edad := 18;
+    
+    if edad >= min_edad then
+        writeln('¡Eres mayor de edad!')
+    else
+        writeln('Te faltan ', min_edad - edad, ' años para ser mayor de edad.');
+    
+    writeln('¡Programa terminado!');
+end.
