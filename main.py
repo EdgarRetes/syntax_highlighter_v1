@@ -31,7 +31,7 @@ def parse_s_expression(tokens_iter):
 def s_exp_to_re_pattern(s_exp_list):
     if not isinstance(s_exp_list, list):
         if s_exp_list == "alpha":
-            return r'[a-zA-ZÀ-ÿ]'  # Added Unicode support for Spanish characters
+            return r'[a-zA-ZÀ-ÿ]'  
         elif s_exp_list == "digit":
             return r'\d'
         elif s_exp_list == "_":
@@ -46,15 +46,15 @@ def s_exp_to_re_pattern(s_exp_list):
             return r'\t'
         elif s_exp_list == "\\r":
             return r'\r'
-        elif s_exp_list == "\n":  # Handle literal newline
+        elif s_exp_list == "\n": 
             return r'\n'
-        elif s_exp_list == "\t":  # Handle literal tab
+        elif s_exp_list == "\t":  
             return r'\t'
-        elif s_exp_list == "\r":  # Handle literal carriage return
+        elif s_exp_list == "\r":  
             return r'\r'
         elif s_exp_list == " ":
             return r' '
-        elif s_exp_list == "dot-char":  # Fixed: removed quotes and list check
+        elif s_exp_list == "dot-char":  
             return r'.'
 
         if (s_exp_list.startswith('"') and s_exp_list.endswith('"')) or \
@@ -71,7 +71,6 @@ def s_exp_to_re_pattern(s_exp_list):
 
     if operator == "escape-char":
         escaped_char = s_exp_list[1]
-        # Handle both quoted and unquoted escape characters
         if (escaped_char.startswith('"') and escaped_char.endswith('"')) or \
            (escaped_char.startswith("'") and escaped_char.endswith("'")):
             escaped_char = escaped_char[1:-1]
@@ -165,33 +164,26 @@ def load_lexical_rules(filepath):
                 token_name = sub_exp[1]
                 pattern_s_exp_list = sub_exp[2]
 
-                # Patrones específicos mejorados para cada lenguaje
                 if token_name == "STRING":
                     if language_name == "Haskell":
-                        # Patrón mejorado para strings de Haskell con escape sequences
                         python_regex = r'"(?:[^"\\]|\\[\\\"nrtbfav]|\\[0-9]+|\\x[0-9a-fA-F]+)*"'
                     elif language_name == "Pascal":
-                        # Patrón para strings de Pascal (comillas simples)
                         python_regex = r"'(?:[^']|'')*'"
                     elif language_name == "Cpp":
-                        # Patrón mejorado para strings de C++
                         python_regex = r'(?:"(?:[^"\\]|\\.)*"|\'(?:[^\'\\]|\\.)*\')'
                     else:
                         python_regex = s_exp_to_re_pattern(pattern_s_exp_list)
                 
                 elif token_name == "CHAR":
                     if language_name == "Haskell":
-                        # Patrón para caracteres de Haskell
                         python_regex = r"'(?:[^'\\]|\\[\\\'nrtbfav]|\\[0-9]+|\\x[0-9a-fA-F]+)'"
                     else:
                         python_regex = s_exp_to_re_pattern(pattern_s_exp_list)
                 
                 elif token_name == "COMMENT":
                     if language_name == "Haskell":
-                        # Comentarios de Haskell: -- hasta fin de línea y {- ... -}
                         python_regex = r'(?:--[^\n]*|{-(?:[^-]|-(?!}))*-})'
                     elif language_name == "Pascal":
-                        # Comentarios de Pascal: { ... }, (* ... *), // ...
                         python_regex = r'(?:{[^}]*}|\(\*(?:[^*]|\*(?!\)))*\*\)|//[^\n]*)'
                     elif language_name == "Cpp":
                         python_regex = r'(?://[^\n]*|/\*[\s\S]*?\*/)'
@@ -199,43 +191,35 @@ def load_lexical_rules(filepath):
                         python_regex = s_exp_to_re_pattern(pattern_s_exp_list)
                 
                 elif token_name == "WHITESPACE":
-                    # Patrón directo para espacios en blanco
                     python_regex = r'[ \t\n\r]+'
                 
                 elif token_name == "NUMBER":
                     if language_name == "Haskell":
-                        # Números de Haskell (enteros y flotantes)
                         python_regex = r'(?:\d+\.\d+|\d+)'
                     elif language_name == "Pascal":
-                        # Números de Pascal (enteros, flotantes, científicos)
                         python_regex = r'(?:\d+(?:\.\d+)?(?:[eE][+-]?\d+)?|\d+)'
                     else:
                         python_regex = s_exp_to_re_pattern(pattern_s_exp_list)
                 
                 elif token_name == "IDENTIFIER":
                     if language_name == "Haskell":
-                        # Identificadores de Haskell (pueden incluir ')
                         python_regex = r"\b[a-zA-Z_][a-zA-Z0-9_']*\b"
                     elif language_name == "Pascal":
-                        # Identificadores de Pascal (case insensitive)
                         python_regex = r'\b[a-zA-Z][a-zA-Z0-9_]*\b'
                     else:
                         python_regex = s_exp_to_re_pattern(pattern_s_exp_list)
                 
                 elif token_name == "KEYWORD":
                     if language_name == "Pascal":
-                        # Keywords de Pascal (case insensitive)
-                        keywords = pattern_s_exp_list[1:]  # Skip 'or'
+                        keywords = pattern_s_exp_list[1:] 
                         keyword_pattern = '|'.join([re.escape(kw.strip('"\'')) for kw in keywords])
                         python_regex = rf'\b(?:{keyword_pattern})\b'
                     else:
                         python_regex = s_exp_to_re_pattern(pattern_s_exp_list)
-                        # Agregar word boundaries para keywords
                         if not (python_regex.startswith(r'\b') and python_regex.endswith(r'\b')):
                             python_regex = r'\b' + python_regex + r'\b'
                 
                 elif token_name == "OPERATOR_IDENTIFIER" and language_name == "Haskell":
-                    # Operadores especiales de Haskell
                     python_regex = r'[~!@#$%^&*\-+=|\\/<>.:?]+'
                 
                 else:
@@ -245,7 +229,6 @@ def load_lexical_rules(filepath):
             else:
                 print(f"Advertencia: S-expression de token no reconocida dentro de '{language_name}': {sub_exp}")
 
-        # Orden de prioridad fijo
         order_priority = {
             'WHITESPACE': 0,
             'COMMENT': 1,
@@ -302,7 +285,6 @@ def tokenize_code(code_filepath, language_rules):
             char = code_content[current_pos]
             print(f"Error léxico: Carácter no reconocido '{char}' (ASCII: {ord(char)}) en la posición {current_pos} del archivo {code_filepath}")
             
-            # Show context around the error
             start = max(0, current_pos - 10)
             end = min(code_length, current_pos + 10)
             context = code_content[start:end]
@@ -313,7 +295,6 @@ def tokenize_code(code_filepath, language_rules):
     return tokens
 
 def generate_html_output(filepath, lang_name, tokens, elapsed_time):
-    # CSS for syntax highlighting and table styling
     css_styles = """
       span {
         cursor: default;
