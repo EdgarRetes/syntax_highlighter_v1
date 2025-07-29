@@ -1,10 +1,31 @@
 module Main where
 
 import System.IO
+import Data.Char (isAlpha, toUpper)
 
--- Función para obtener las letras de un nombre
+-- Función para obtener las letras de un nombre (sin espacios)
 obtenerLetras :: String -> [Char]
 obtenerLetras = filter (/= ' ')
+
+-- Función para validar si el nombre es válido (solo letras y espacios)
+esNombreValido :: String -> Bool
+esNombreValido nombre = all (\c -> isAlpha c || c == ' ') nombre && not (null nombre)
+
+-- Función para convertir a mayúsculas todas las letras de un nombre
+convertirMayusculas :: String -> String
+convertirMayusculas = map toUpper
+
+-- Función para calcular los años que faltan para ser mayor de edad
+aniosParaMayor :: Int -> Int -> Int
+aniosParaMayor edad minEdad
+    | edad >= minEdad = 0
+    | otherwise = minEdad - edad
+
+-- Función para imprimir las letras del nombre con índice
+imprimirLetrasConIndice :: String -> IO ()
+imprimirLetrasConIndice nombre = mapM_ imprimirLetra (zip [1..] (obtenerLetras nombre))
+  where
+    imprimirLetra (i, c) = putStrLn $ show i ++ ". " ++ [c]
 
 -- Función principal
 main :: IO ()
@@ -12,22 +33,23 @@ main = do
     putStr "Por favor, ingresa tu nombre: "
     hFlush stdout
     nombreUsuario <- getLine
-    
-    if null nombreUsuario
-        then putStrLn "No ingresaste ningún nombre. ¡Hasta luego!"
+
+    if not (esNombreValido nombreUsuario)
+        then putStrLn "Nombre inválido. Usa solo letras y espacios."
         else do
-            putStrLn $ "\n¡Hola, " ++ nombreUsuario ++ "!"
+            putStrLn $ "\n¡Hola, " ++ convertirMayusculas nombreUsuario ++ "!"
             putStrLn "Las letras de tu nombre son:"
-            mapM_ (\c -> putStrLn $ "- " ++ [c]) (obtenerLetras nombreUsuario)
-            
+            imprimirLetrasConIndice nombreUsuario
+
             putStr "¿Cuántos años tienes?: "
             hFlush stdout
             edadStr <- getLine
+
             let edad = read edadStr :: Int
                 minEdad = 18
-            
+
             if edad >= minEdad
                 then putStrLn "¡Eres mayor de edad!"
-                else putStrLn $ "Te faltan " ++ show (minEdad - edad) ++ " años para ser mayor de edad."
-            
+                else putStrLn $ "Te faltan " ++ show (aniosParaMayor edad minEdad) ++ " años para ser mayor de edad."
+
             putStrLn "\n¡Programa terminado!"
