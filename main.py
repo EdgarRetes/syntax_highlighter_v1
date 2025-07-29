@@ -1,4 +1,5 @@
 import re
+import time 
 
 def _tokenize_s_exp_string(text):
     token_patterns = re.compile(
@@ -235,7 +236,7 @@ def load_lexical_rules(filepath):
                 
                 elif token_name == "OPERATOR_IDENTIFIER" and language_name == "Haskell":
                     # Operadores especiales de Haskell
-                    python_regex = r'[~!@#$%^&*\-+=|\\/<>.:?`]+'
+                    python_regex = r'[~!@#$%^&*\-+=|\\/<>.:?]+'
                 
                 else:
                     python_regex = s_exp_to_re_pattern(pattern_s_exp_list)
@@ -311,7 +312,7 @@ def tokenize_code(code_filepath, language_rules):
 
     return tokens
 
-def generate_html_output(filepath, lang_name, tokens):
+def generate_html_output(filepath, lang_name, tokens, elapsed_time):
     # CSS for syntax highlighting and table styling
     css_styles = """
       span {
@@ -327,20 +328,20 @@ def generate_html_output(filepath, lang_name, tokens):
           padding: 15px;
           border-radius: 5px;
           margin: 20px;
-          white-space: pre-wrap; /* Preserves whitespace and wraps lines */
-          word-wrap: break-word; /* Breaks long words */
+          white-space: pre-wrap;
+          word-wrap: break-word;
       }
-      .PREPROCESSOR_DIRECTIVE { color: #56b6c2; } /* Cyan */
-      .KEYWORD { color: #c678dd; } /* Purple */
-      .IDENTIFIER { color: #e06c75; } /* Reddish-orange */
-      .DELIMITER { color: #abb2bf; } /* Gray */
-      .OPERATOR { color: #56b6c2; } /* Cyan */
-      .STRING { color: #98c379; } /* Green */
-      .NUMBER { color: #d19a66; } /* Orange */
-      .COMMENT { color: #5c6370; font-style: italic; } /* Dark gray, italic */
-      .CHAR { color: #98c379; } /* Green */
-      .OPERATOR_IDENTIFIER { color: #e06c75; } /* Reddish-orange (similar to identifier but distinct if needed) */
-      .WHITESPACE { color: #abb2bf; } /* Can keep default or make it subtle if visible */
+      .PREPROCESSOR_DIRECTIVE { color: #56b6c2; }
+      .KEYWORD { color: #c678dd; }
+      .IDENTIFIER { color: #e06c75; }
+      .DELIMITER { color: #abb2bf; }
+      .OPERATOR { color: #56b6c2; }
+      .STRING { color: #98c379; }
+      .NUMBER { color: #d19a66; }
+      .COMMENT { color: #5c6370; font-style: italic; }
+      .CHAR { color: #98c379; }
+      .OPERATOR_IDENTIFIER { color: #e06c75; }
+      .WHITESPACE { color: #abb2bf; }
       .ERROR { background-color: red; color: white; }
       table.token-summary {
         margin: 20px;
@@ -385,11 +386,12 @@ def generate_html_output(filepath, lang_name, tokens):
     count_by_type = {}
     for token_type, _ in tokens:
         if token_type == 'WHITESPACE':
-            continue  # Ignorar whitespace
+            continue
         count_by_type[token_type] = count_by_type.get(token_type, 0) + 1
 
-    html_content += """
-    <h2>Análisis de Tokens</h2>
+    html_content += f"""
+    <h2>Estadísticas de Tokenización</h2>
+    <p><strong>Tiempo de ejecución:</strong> {elapsed_time:.4f} segundos</p>
     <table class="token-summary">
         <thead>
             <tr><th>Tipo de Token</th><th>Cantidad</th><th>Porcentaje</th></tr>
@@ -405,9 +407,6 @@ def generate_html_output(filepath, lang_name, tokens):
         <tr><th>Total</th><th>{total_tokens}</th><th>100%</th></tr>
         </tbody>
     </table>
-    """
-
-    html_content += """
     </body>
     </html>
     """
@@ -415,10 +414,13 @@ def generate_html_output(filepath, lang_name, tokens):
     output_html_filepath = f"{filepath}.html"
     with open(output_html_filepath, 'w', encoding='utf-8') as f:
         f.write(html_content)
-    print(f"HTML output saved to {output_html_filepath}")
+    print(f"✅ HTML output saved to {output_html_filepath}")
+
 
 
 def main():
+    total_start_time = time.time()
+
     expr_s_file = "lexical_definitions.txt"
     files_to_process = {
         "input.cpp": "Cpp",
@@ -431,14 +433,31 @@ def main():
     for filepath, lang_name in files_to_process.items():
         if lang_name in token_patterns:
             print(f"\n--- Tokenizando {filepath} ({lang_name}) ---")
+
+            file_start_time = time.time()
+
             language_rules = token_patterns[lang_name]
-            
             tokens = tokenize_code(filepath, language_rules)
+
             for token_type, token_value in tokens:
                 print(f"  {token_type:<20} : '{token_value}'")
-            generate_html_output(filepath, lang_name, tokens)
+
+            file_end_time = time.time()
+            file_elapsed = file_end_time - file_start_time
+
+            generate_html_output(filepath, lang_name, tokens, file_elapsed)
+
+            total_tokens = sum(1 for t in tokens if t[0] != 'WHITESPACE')
+            print(f"🔢 Total de tokens: {total_tokens}")
+            print(f"⏱️ Tiempo de ejecución para {filepath}: {file_elapsed:.4f} segundos")
         else:
-            print(f"Error: No se encontraron reglas léxicas para el lenguaje '{lang_name}'.")
+            print(f"❌ Error: No se encontraron reglas léxicas para el lenguaje '{lang_name}'.")
+
+    total_end_time = time.time()
+    total_elapsed = total_end_time - total_start_time
+    print(f"\n✅ Tiempo total de ejecución: {total_elapsed:.4f} segundos")
+
+
 
 if __name__ == "__main__":
     main()
