@@ -39,11 +39,10 @@
 ;; DEFINICIONES PARA HASKELL
 ;; ====================================================================
 (language Haskell
-    (token KEYWORD (or "case" "class" "data" "default" "deriving" "do" "else" "if" "import"
+    (token KEYWORD (or "String" "Bool" "Char" "Int" "case" "class" "data" "default" "deriving" "do" "else" "if" "import"
                         "in" "infix" "infixl" "infixr" "let" "module" "newtype" "of" "then"
                         "type" "where" "forall"))
     (token IDENTIFIER "custom")  ;; Se maneja con patrón custom
-    (token OPERATOR_IDENTIFIER "custom")  ;; Se maneja con patrón custom
     (token NUMBER "custom")  ;; Se maneja con patrón custom
     (token STRING "custom")  ;; Se maneja con patrón custom
     (token CHAR "custom")  ;; Se maneja con patrón custom
