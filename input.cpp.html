@@ -1,168 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head><title>Tokenized Code - Cpp</title></head>
+<body><pre><code>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tokenized Code - input.cpp (Cpp)</title>
-        <style>
-            
-      span {
-        cursor: default;
-      }
-      span:hover {
-        background-color: rgba(255,255,255,0.1);
-      }
-      body { font-family: monospace; background-color: #282c34; color: #abb2bf; }
-      .code-container {
-          background-color: #21252b;
-          border: 1px solid #3b4048;
-          padding: 15px;
-          border-radius: 5px;
-          margin: 20px;
-          white-space: pre-wrap;
-          word-wrap: break-word;
-      }
-      .PREPROCESSOR_DIRECTIVE { color: #56b6c2; }
-      .KEYWORD { color: #c678dd; }
-      .IDENTIFIER { color: #e06c75; }
-      .DELIMITER { color: #abb2bf; }
-      .OPERATOR { color: #56b6c2; }
-      .STRING { color: #98c379; }
-      .NUMBER { color: #d19a66; }
-      .COMMENT { color: #5c6370; font-style: italic; }
-      .CHAR { color: #98c379; }
-      .OPERATOR_IDENTIFIER { color: #e06c75; }
-      .WHITESPACE { color: #abb2bf; }
-      .ERROR { background-color: red; color: white; }
-      table.token-summary {
-        margin: 20px;
-        border-collapse: collapse;
-        width: 400px;
-        background-color: #21252b;
-        color: #abb2bf;
-      }
-      table.token-summary th, table.token-summary td {
-        border: 1px solid #3b4048;
-        padding: 8px;
-        text-align: left;
-      }
-      table.token-summary th {
-        background-color: #3b4048;
-      }
-    
-        </style>
-    </head>
-    <body>
-        <h1>Tokenized Code: input.cpp (Cpp)</h1>
-        <div class="code-container">
-    <span class="PREPROCESSOR_DIRECTIVE" title="PREPROCESSOR_DIRECTIVE">#include &lt;iostream&gt;</span><span class="WHITESPACE" title="WHITESPACE">
-</span><span class="PREPROCESSOR_DIRECTIVE" title="PREPROCESSOR_DIRECTIVE">#include &lt;string&gt;</span><span class="WHITESPACE" title="WHITESPACE">
-</span><span class="PREPROCESSOR_DIRECTIVE" title="PREPROCESSOR_DIRECTIVE">#include &lt;vector&gt;</span><span class="WHITESPACE" title="WHITESPACE">
-</span><span class="PREPROCESSOR_DIRECTIVE" title="PREPROCESSOR_DIRECTIVE">#include &lt;algorithm&gt;</span><span class="WHITESPACE" title="WHITESPACE">
-</span><span class="KEYWORD" title="KEYWORD">using</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">namespace</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">std</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+// Función auxiliar para invertir una cadena
+string invertirCadena(const string& str) {
+    string invertida = str;
+    reverse(invertida.begin(), invertida.end());
+    return invertida;
+}
 
-</span><span class="COMMENT" title="COMMENT">// Función auxiliar para invertir una cadena</span><span class="WHITESPACE" title="WHITESPACE">
-</span><span class="KEYWORD" title="KEYWORD">string</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">invertirCadena</span><span class="DELIMITER" title="DELIMITER">(</span><span class="KEYWORD" title="KEYWORD">const</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">string</span><span class="OPERATOR" title="OPERATOR">&amp;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">str</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="KEYWORD" title="KEYWORD">string</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">invertida</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">str</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="IDENTIFIER" title="IDENTIFIER">reverse</span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">invertida</span><span class="OPERATOR" title="OPERATOR">.</span><span class="IDENTIFIER" title="IDENTIFIER">begin</span><span class="DELIMITER" title="DELIMITER">(</span><span class="DELIMITER" title="DELIMITER">)</span><span class="OPERATOR" title="OPERATOR">,</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">invertida</span><span class="OPERATOR" title="OPERATOR">.</span><span class="IDENTIFIER" title="IDENTIFIER">end</span><span class="DELIMITER" title="DELIMITER">(</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="KEYWORD" title="KEYWORD">return</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">invertida</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-</span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
+// Función para contar vocales
+int contarVocales(const string& str) {
+    int count = 0;
+    for (char c : str) {
+        char ch = tolower(c);
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+            count++;
+        }
+    }
+    return count;
+}
 
-</span><span class="COMMENT" title="COMMENT">// Función para contar vocales</span><span class="WHITESPACE" title="WHITESPACE">
-</span><span class="KEYWORD" title="KEYWORD">int</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">contarVocales</span><span class="DELIMITER" title="DELIMITER">(</span><span class="KEYWORD" title="KEYWORD">const</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">string</span><span class="OPERATOR" title="OPERATOR">&amp;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">str</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="KEYWORD" title="KEYWORD">int</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">count</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="NUMBER" title="NUMBER">0</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="KEYWORD" title="KEYWORD">for</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="KEYWORD" title="KEYWORD">char</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">c</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">:</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">str</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="KEYWORD" title="KEYWORD">char</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">ch</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">tolower</span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">c</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="KEYWORD" title="KEYWORD">if</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">ch</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">==</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">'a'</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">||</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">ch</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">==</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">'e'</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">||</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">ch</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">==</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">'i'</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">||</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">ch</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">==</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">'o'</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">||</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">ch</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">==</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">'u'</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-            </span><span class="IDENTIFIER" title="IDENTIFIER">count</span><span class="OPERATOR" title="OPERATOR">++</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="KEYWORD" title="KEYWORD">return</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">count</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-</span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
+int main() {
+    string nombre_usuario;
+    cout << "Por favor, ingresa tu nombre: ";
+    getline(cin, nombre_usuario);
 
-</span><span class="KEYWORD" title="KEYWORD">int</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">main</span><span class="DELIMITER" title="DELIMITER">(</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="KEYWORD" title="KEYWORD">string</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"Por favor, ingresa tu nombre: "</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="IDENTIFIER" title="IDENTIFIER">getline</span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">cin</span><span class="OPERATOR" title="OPERATOR">,</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    if (nombre_usuario.empty()) {
+        cout << "No ingresaste ningún nombre. ¡Hasta luego!" << endl;
+        return 0;
+    }
 
-    </span><span class="KEYWORD" title="KEYWORD">if</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="OPERATOR" title="OPERATOR">.</span><span class="IDENTIFIER" title="IDENTIFIER">empty</span><span class="DELIMITER" title="DELIMITER">(</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"No ingresaste ningún nombre. ¡Hasta luego!"</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">endl</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="KEYWORD" title="KEYWORD">return</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="NUMBER" title="NUMBER">0</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
+    cout << "\n¡Hola, " << nombre_usuario << "!" << endl;
+    cout << "Las letras de tu nombre son:" << endl;
 
-    </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"\n¡Hola, "</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"!"</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">endl</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"Las letras de tu nombre son:"</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">endl</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    for (char c : nombre_usuario) {
+        if (c != ' ') {
+            cout << "- " << c << endl;
+        }
+    }
 
-    </span><span class="KEYWORD" title="KEYWORD">for</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="KEYWORD" title="KEYWORD">char</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">c</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">:</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="KEYWORD" title="KEYWORD">if</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">c</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">!=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">' '</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-            </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"- "</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">c</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">endl</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
+    string edad_str;
+    cout << "¿Cuántos años tienes?: ";
+    getline(cin, edad_str);
+    int edad = stoi(edad_str);
+    int min_edad = 18;
 
-    </span><span class="KEYWORD" title="KEYWORD">string</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">edad_str</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"¿Cuántos años tienes?: "</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="IDENTIFIER" title="IDENTIFIER">getline</span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">cin</span><span class="OPERATOR" title="OPERATOR">,</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">edad_str</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="KEYWORD" title="KEYWORD">int</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">edad</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">stoi</span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">edad_str</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="KEYWORD" title="KEYWORD">int</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">min_edad</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="NUMBER" title="NUMBER">18</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    if (edad >= min_edad) {
+        cout << "¡Eres mayor de edad!" << endl;
+    } else {
+        int diff = min_edad - edad;
+        cout << "Te faltan " << diff << " años para ser mayor de edad." << endl;
+    }
 
-    </span><span class="KEYWORD" title="KEYWORD">if</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">edad</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&gt;=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">min_edad</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"¡Eres mayor de edad!"</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">endl</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">else</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="KEYWORD" title="KEYWORD">int</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">diff</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">min_edad</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">-</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">edad</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"Te faltan "</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">diff</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">" años para ser mayor de edad."</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">endl</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
+    cout << "\nTu nombre al revés es: " << invertirCadena(nombre_usuario) << endl;
+    cout << "Tiene " << contarVocales(nombre_usuario) << " vocales." << endl;
 
-    </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"\nTu nombre al revés es: "</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">invertirCadena</span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">endl</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"Tiene "</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">contarVocales</span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">" vocales."</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">endl</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    // Extra: guardar letras en vector
+    vector<char> letras;
+    for (char c : nombre_usuario) {
+        if (isalpha(c)) {
+            letras.push_back(c);
+        }
+    }
 
-    </span><span class="COMMENT" title="COMMENT">// Extra: guardar letras en vector</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="IDENTIFIER" title="IDENTIFIER">vector</span><span class="OPERATOR" title="OPERATOR">&lt;</span><span class="KEYWORD" title="KEYWORD">char</span><span class="OPERATOR" title="OPERATOR">&gt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">letras</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="KEYWORD" title="KEYWORD">for</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="KEYWORD" title="KEYWORD">char</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">c</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">:</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">nombre_usuario</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="KEYWORD" title="KEYWORD">if</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">isalpha</span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">c</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-            </span><span class="IDENTIFIER" title="IDENTIFIER">letras</span><span class="OPERATOR" title="OPERATOR">.</span><span class="IDENTIFIER" title="IDENTIFIER">push_back</span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">c</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
+    cout << "Letras almacenadas en el vector: ";
+    for (char l : letras) {
+        cout << l << " ";
+    }
+    cout << endl;
 
-    </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"Letras almacenadas en el vector: "</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="KEYWORD" title="KEYWORD">for</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="KEYWORD" title="KEYWORD">char</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">l</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">:</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">letras</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">l</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">" "</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">endl</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
+    // Verificar si hay alguna letra duplicada
+    bool duplicado = false;
+    for (size_t i = 0; i < letras.size(); i++) {
+        for (size_t j = i + 1; j < letras.size(); j++) {
+            if (letras[i] == letras[j]) {
+                duplicado = true;
+                break;
+            }
+        }
+        if (duplicado) break;
+    }
 
-    </span><span class="COMMENT" title="COMMENT">// Verificar si hay alguna letra duplicada</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="IDENTIFIER" title="IDENTIFIER">bool</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">duplicado</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">false</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="KEYWORD" title="KEYWORD">for</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">size_t</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">i</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="NUMBER" title="NUMBER">0</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">i</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">letras</span><span class="OPERATOR" title="OPERATOR">.</span><span class="IDENTIFIER" title="IDENTIFIER">size</span><span class="DELIMITER" title="DELIMITER">(</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">i</span><span class="OPERATOR" title="OPERATOR">++</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="KEYWORD" title="KEYWORD">for</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">size_t</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">j</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">i</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">+</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="NUMBER" title="NUMBER">1</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">j</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">letras</span><span class="OPERATOR" title="OPERATOR">.</span><span class="IDENTIFIER" title="IDENTIFIER">size</span><span class="DELIMITER" title="DELIMITER">(</span><span class="DELIMITER" title="DELIMITER">)</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">j</span><span class="OPERATOR" title="OPERATOR">++</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-            </span><span class="KEYWORD" title="KEYWORD">if</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">letras</span><span class="DELIMITER" title="DELIMITER">[</span><span class="IDENTIFIER" title="IDENTIFIER">i</span><span class="DELIMITER" title="DELIMITER">]</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">==</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">letras</span><span class="DELIMITER" title="DELIMITER">[</span><span class="IDENTIFIER" title="IDENTIFIER">j</span><span class="DELIMITER" title="DELIMITER">]</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-                </span><span class="IDENTIFIER" title="IDENTIFIER">duplicado</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">=</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">true</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-                </span><span class="KEYWORD" title="KEYWORD">break</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-            </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="KEYWORD" title="KEYWORD">if</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">duplicado</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">break</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
+    if (duplicado) {
+        cout << "Tu nombre tiene letras repetidas." << endl;
+    } else {
+        cout << "Tu nombre no tiene letras repetidas." << endl;
+    }
 
-    </span><span class="KEYWORD" title="KEYWORD">if</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">(</span><span class="IDENTIFIER" title="IDENTIFIER">duplicado</span><span class="DELIMITER" title="DELIMITER">)</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"Tu nombre tiene letras repetidas."</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">endl</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="KEYWORD" title="KEYWORD">else</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="DELIMITER" title="DELIMITER">{</span><span class="WHITESPACE" title="WHITESPACE">
-        </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"Tu nombre no tiene letras repetidas."</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">endl</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
+    cout << "\n¡Programa terminado!" << endl;
+    return 0;
+}
 
-    </span><span class="IDENTIFIER" title="IDENTIFIER">cout</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="STRING" title="STRING">"\n¡Programa terminado!"</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="OPERATOR" title="OPERATOR">&lt;&lt;</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="IDENTIFIER" title="IDENTIFIER">endl</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-    </span><span class="KEYWORD" title="KEYWORD">return</span><span class="WHITESPACE" title="WHITESPACE"> </span><span class="NUMBER" title="NUMBER">0</span><span class="DELIMITER" title="DELIMITER">;</span><span class="WHITESPACE" title="WHITESPACE">
-</span><span class="DELIMITER" title="DELIMITER">}</span><span class="WHITESPACE" title="WHITESPACE">
-</span></div>
-    <h2>Estadísticas de Tokenización</h2>
-    <p><strong>Tiempo de ejecución:</strong> 0.0592 segundos</p>
-    <table class="token-summary">
-        <thead>
-            <tr><th>Tipo de Token</th><th>Cantidad</th><th>Porcentaje</th></tr>
-        </thead>
-        <tbody>
-    <tr><td class=DELIMITER>DELIMITER</td><td>149</td><td>34.73%</td></tr><tr><td class=IDENTIFIER>IDENTIFIER</td><td>118</td><td>27.51%</td></tr><tr><td class=OPERATOR>OPERATOR</td><td>78</td><td>18.18%</td></tr><tr><td class=KEYWORD>KEYWORD</td><td>46</td><td>10.72%</td></tr><tr><td class=STRING>STRING</td><td>24</td><td>5.59%</td></tr><tr><td class=NUMBER>NUMBER</td><td>6</td><td>1.40%</td></tr><tr><td class=PREPROCESSOR_DIRECTIVE>PREPROCESSOR_DIRECTIVE</td><td>4</td><td>0.93%</td></tr><tr><td class=COMMENT>COMMENT</td><td>4</td><td>0.93%</td></tr>
-        <tr><th>Total</th><th>429</th><th>100%</th></tr>
-        </tbody>
-    </table>
-    </body>
-    </html>
-    
+</code></pre></body>
+</html>

@@ -1,8 +1,9 @@
 import os
+import re
 import time
-import json
 import multiprocessing as mp
 from pathlib import Path
+from main import load_lexical_rules, tokenize_code, generate_html_output
 
 def detectar_lenguaje(filename):
     if filename.endswith('.cpp'):
@@ -15,71 +16,52 @@ def detectar_lenguaje(filename):
         return 'Python'
     return None
 
-def leer_codigo(path):
-    with open(path, 'r', encoding='utf-8') as f:
-        return f.read()
-
-def simular_tokenizado_html(codigo, lenguaje):
-    return f"""<!DOCTYPE html>
-<html>
-<head><title>Tokenized Code - {lenguaje}</title></head>
-<body><pre><code>
-{codigo}
-</code></pre></body>
-</html>"""
+# Se cargan las reglas una sola vez
+LEXICAL_RULES = load_lexical_rules("lexical_definitions.txt")
 
 def procesar_archivo(path):
-    start = time.time()
-    lenguaje = detectar_lenguaje(str(path))
-    if not lenguaje:
+    lenguaje = detectar_lenguaje(path.name)
+    if lenguaje is None or lenguaje not in LEXICAL_RULES:
         return None
-    codigo = leer_codigo(path)
-    html = simular_tokenizado_html(codigo, lenguaje)
-    output_path = Path(".") / f"{path.stem}.{lenguaje}.html"
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(html)
-    end = time.time()
-    return {'archivo': str(path), 'lenguaje': lenguaje, 'tiempo': end - start}
 
-def version_secuencial():
-    resultados = []
-    for archivo in ["input.cpp", "input.hs", "input.pas", "input.py"]:
-        path = Path(archivo)
-        if path.exists():
-            result = procesar_archivo(path)
-            if result:
-                resultados.append(result)
-    return resultados
+    start = time.time()
+    tokens = tokenize_code(path, LEXICAL_RULES[lenguaje])
+    elapsed = time.time() - start
 
-def version_paralela():
-    rutas = [Path(f) for f in ["input.cpp", "input.hs", "input.pas", "input.py"] if Path(f).exists()]
+    generate_html_output(str(path), lenguaje, tokens, elapsed)
+    return str(path) + ".html"
+
+def main():
+    carpeta_entrada = Path("inputs")
+    archivos = list(carpeta_entrada.glob("*"))
+    archivos = [archivo for archivo in archivos if detectar_lenguaje(archivo.name)]
+
+    print(f"[INFO] Procesando {len(archivos)} archivos...\n")
+
+    # --- Modo secuencial ---
+    print("[INFO] Iniciando procesamiento secuencial...")
+    start_secuencial = time.time()
+    resultados_secuencial = []
+    for archivo in archivos:
+        resultado = procesar_archivo(archivo)
+        resultados_secuencial.append(resultado)
+    tiempo_secuencial = time.time() - start_secuencial
+    print(f"[INFO] Procesamiento secuencial completado en {tiempo_secuencial:.2f} segundos.")
+    print(f"[INFO] Archivos procesados: {len([r for r in resultados_secuencial if r])}\n")
+
+    # --- Modo paralelo ---
+    print("[INFO] Iniciando procesamiento paralelo...")
+    start_paralelo = time.time()
     with mp.Pool(mp.cpu_count()) as pool:
-        resultados = pool.map(procesar_archivo, rutas)
-    return [r for r in resultados if r is not None]
+        resultados_paralelo = pool.map(procesar_archivo, archivos)
+    tiempo_paralelo = time.time() - start_paralelo
+    print(f"[INFO] Procesamiento paralelo completado en {tiempo_paralelo:.2f} segundos.")
+    print(f"[INFO] Archivos procesados: {len([r for r in resultados_paralelo if r])}\n")
 
-if __name__ == '__main__':
-    print("Ejecutando versión secuencial...")
-    t0 = time.time()
-    secuencial = version_secuencial()
-    t1 = time.time()
-    tiempo_secuencial = t1 - t0
+    # --- Comparación ---
+    print("[INFO] Comparación de tiempos:")
+    print(f"  • Secuencial: {tiempo_secuencial:.2f} segundos")
+    print(f"  • Paralelo:   {tiempo_paralelo:.2f} segundos")
 
-    print("Ejecutando versión paralela...")
-    t2 = time.time()
-    paralela = version_paralela()
-    t3 = time.time()
-    tiempo_paralela = t3 - t2
-
-    speedup = round(tiempo_secuencial / tiempo_paralela, 2) if tiempo_paralela else None
-
-    print(f"\nTiempo secuencial: {tiempo_secuencial:.6f}s")
-    print(f"Tiempo paralelo:   {tiempo_paralela:.6f}s")
-    print(f"Speedup: {speedup}x")
-
-    with open("resumen_resultados.json", 'w') as f:
-        json.dump({
-            'tiempo_secuencial': tiempo_secuencial,
-            'tiempo_paralela': tiempo_paralela,
-            'speedup': speedup,
-            'procesados': len(paralela)
-        }, f, indent=2)
+if __name__ == "__main__":
+    main()

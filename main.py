@@ -398,7 +398,6 @@ def generate_html_output(filepath, lang_name, tokens, elapsed_time):
     print(f"✅ HTML output saved to {output_html_filepath}")
 
 
-
 def main():
     total_start_time = time.time()
 
