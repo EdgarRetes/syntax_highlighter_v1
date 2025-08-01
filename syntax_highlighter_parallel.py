@@ -62,6 +62,11 @@ def main():
     print("[INFO] Comparación de tiempos:")
     print(f"  • Secuencial: {tiempo_secuencial:.2f} segundos")
     print(f"  • Paralelo:   {tiempo_paralelo:.2f} segundos")
+    if tiempo_paralelo > 0:
+        speedup = tiempo_secuencial / tiempo_paralelo
+        print(f"  • Speedup:    {speedup:.2f}x")
+    else:
+        print("  • Speedup:    No calculado (tiempo paralelo es 0)")
 
 if __name__ == "__main__":
     main()
