@@ -1,5 +1,6 @@
 import re
 import time 
+import os
 
 def _tokenize_s_exp_string(text):
     token_patterns = re.compile(
@@ -392,7 +393,12 @@ def generate_html_output(filepath, lang_name, tokens, elapsed_time):
     </html>
     """
 
-    output_html_filepath = f"{filepath}.html"
+    output_dir = "outputs"
+    os.makedirs(output_dir, exist_ok=True)
+
+    filename = os.path.basename(filepath)
+    output_html_filepath = os.path.join(output_dir, f"{filename}.html")
+
     with open(output_html_filepath, 'w', encoding='utf-8') as f:
         f.write(html_content)
     print(f"✅ HTML output saved to {output_html_filepath}")
